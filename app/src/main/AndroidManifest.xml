@@ -17,9 +17,10 @@
         android:theme="@style/Theme.MarvelCharacters"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.MarvelCharacters">
+            android:theme="@style/Theme.MarvelCharacters"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

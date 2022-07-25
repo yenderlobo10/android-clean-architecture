@@ -1,4 +1,4 @@
-package co.mergedev.marvelcharacters.ui.base.theme
+package co.mergedev.marvelcharacters.ui.common.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

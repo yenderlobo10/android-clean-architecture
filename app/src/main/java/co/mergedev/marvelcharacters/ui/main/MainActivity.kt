@@ -1,16 +1,17 @@
 package co.mergedev.marvelcharacters.ui.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import co.mergedev.marvelcharacters.ui.base.theme.AppTheme
+import co.mergedev.marvelcharacters.ui.common.navigation.AppNavigationHost
+import co.mergedev.marvelcharacters.ui.common.theme.AppTheme
 
+/**
+ * App wrap activity.
+ */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,15 +22,22 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+/**
+ * App root content wrapper.
+ */
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MarvelCharactersApp() {
 
+    val appState = rememberAppState()
+
     AppTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colors.background
+        Scaffold(
+            scaffoldState = appState.scaffoldState
         ) {
-            Text("App Navigation Host is Here")
+            AppNavigationHost(
+                appState = appState
+            )
         }
     }
 }

@@ -1,4 +1,4 @@
-package co.mergedev.marvelcharacters.ui.base.theme
+package co.mergedev.marvelcharacters.ui.common.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
