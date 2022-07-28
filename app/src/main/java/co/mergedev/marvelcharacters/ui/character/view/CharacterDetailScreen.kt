@@ -1,10 +1,10 @@
 package co.mergedev.marvelcharacters.ui.character.view
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
@@ -12,12 +12,17 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import co.mergedev.marvelcharacters.R
 import co.mergedev.marvelcharacters.data.model.Character
@@ -25,6 +30,9 @@ import co.mergedev.marvelcharacters.ui.character.viewModel.CharacterDetailViewMo
 import co.mergedev.marvelcharacters.ui.common.theme.AppTheme
 import co.mergedev.marvelcharacters.ui.main.AppState
 import co.mergedev.marvelcharacters.ui.main.rememberAppState
+import coil.compose.AsyncImage
+import kotlin.math.max
+import kotlin.math.min
 
 
 @Composable
@@ -82,22 +90,53 @@ private fun DetailContent(
 ) {
 
     val scrollState = rememberScrollState()
+    val maxHeightImage = LocalConfiguration.current.screenHeightDp * 0.5
 
-    ConstraintLayout {
+    BoxWithConstraints(
+        Modifier
+            .fillMaxSize()
+            .verticalScroll(scrollState)
+    ) {
 
         // Head image
-        Image(
-            painter = painterResource(id = R.drawable.image_404_landscape),
-            contentDescription = "test-image"
+        AsyncImage(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(max = maxHeightImage.dp)
+                .graphicsLayer {
+                    alpha = min(
+                        1f,
+                        1 - (scrollState.value / (maxHeightImage.toFloat() * 2.3f))
+                    )
+                    translationY = -scrollState.value * 0.1f
+                },
+            model = character.thumbnail?.urlBuilder?.full?.detail,
+            contentDescription = "test-image",
+            placeholder = painterResource(R.drawable.image_404_landscape),
+            error = painterResource(R.drawable.image_404_landscape),
+            contentScale = ContentScale.FillBounds,
+            alignment = BiasAlignment(
+                horizontalBias = 0f,
+                verticalBias = max(
+                    -1f,
+                    -scrollState.value / ((maxHeightImage.toFloat() * 2.3f) / 2)
+                )
+            )
         )
 
         // Detail
         Column(
-            Modifier.verticalScroll(scrollState)
+            Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
         ) {
 
+            Spacer(
+                modifier = Modifier.height(maxHeightImage.dp)
+            )
+
             CharacterDetails(
-                character = character
+                character = character,
             )
         }
     }
@@ -105,29 +144,156 @@ private fun DetailContent(
 
 @Composable
 private fun CharacterDetails(
-    character: Character
+    character: Character,
 ) {
 
-    Column {
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .padding(top = 16.dp, bottom = 30.dp),
+        horizontalArrangement = Arrangement.SpaceAround
+    ) {
 
+        // Comics
+        Box(
+            modifier = Modifier
+                .border(
+                    width = 2.dp,
+                    brush = Brush.linearGradient(
+                        colors = listOf(
+                            MaterialTheme.colors.primary,
+                            MaterialTheme.colors.secondary
+                        ),
+                    ),
+                    shape = CutCornerShape(
+                        topStart = 16.dp,
+                        bottomEnd = 16.dp
+                    )
+                )
+                .padding(16.dp)
+        ) {
+            Column {
+
+                Text(
+                    text = "${character.comics?.available}",
+                    style = MaterialTheme.typography.h6
+                )
+
+                Text(
+                    text = "Comics",
+                    style = MaterialTheme.typography.caption
+                )
+            }
+        }
+
+        // Stories
+        Box(
+            modifier = Modifier
+                .border(
+                    width = 2.dp,
+                    Brush.linearGradient(
+                        colors = listOf(
+                            MaterialTheme.colors.primary,
+                            MaterialTheme.colors.secondary
+                        ),
+                    ),
+                    shape = CutCornerShape(
+                        topStart = 16.dp,
+                        bottomEnd = 16.dp
+                    )
+                )
+                .padding(16.dp)
+        ) {
+            Column {
+
+                Text(
+                    text = "${character.stories?.available}",
+                    style = MaterialTheme.typography.h6
+                )
+
+                Text(
+                    text = "Stories",
+                    style = MaterialTheme.typography.caption
+                )
+            }
+        }
+
+        // Events
+        Box(
+            modifier = Modifier
+                .border(
+                    width = 2.dp,
+                    Brush.linearGradient(
+                        colors = listOf(
+                            MaterialTheme.colors.primary,
+                            MaterialTheme.colors.secondary
+                        ),
+                    ),
+                    shape = CutCornerShape(
+                        topStart = 16.dp,
+                        bottomEnd = 16.dp
+                    )
+                )
+                .padding(16.dp)
+        ) {
+            Column {
+
+                Text(
+                    text = "${character.events?.available}",
+                    style = MaterialTheme.typography.h6
+                )
+
+                Text(
+                    text = "Events",
+                    style = MaterialTheme.typography.caption
+                )
+            }
+        }
+    }
+
+    // Alias
+    Text(
+        text = character.alias,
+        style = MaterialTheme.typography.subtitle1,
+        fontWeight = FontWeight.Medium
+    )
+
+    // Name
+    Text(
+        modifier = Modifier.padding(top = 4.dp, start = 4.dp),
+        text = character.nameWithoutAlias,
+        style = MaterialTheme.typography.h4,
+        fontWeight = FontWeight.Bold
+    )
+
+    // Description
+    character.description?.let {
         Text(
-            text = character.alias,
-            style = MaterialTheme.typography.subtitle1,
-            fontWeight = FontWeight.Medium
+            modifier = Modifier.padding(top = 12.dp),
+            text = it,
+            style = MaterialTheme.typography.body1,
+            textAlign = TextAlign.Justify
         )
+    }
 
+
+    // List comics
+    character.comics?.let { comics ->
         Text(
-            text = character.nameWithoutAlias,
-            style = MaterialTheme.typography.h5,
-            fontWeight = FontWeight.Bold
+            modifier = Modifier.padding(vertical = 12.dp),
+            text = "Comics",
+            style = MaterialTheme.typography.h5
         )
-
-        character.description?.let {
-            Text(
-                text = it,
-                style = MaterialTheme.typography.body1,
-                textAlign = TextAlign.Justify
-            )
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp)
+        ) {
+            comics.items.forEachIndexed { i, comic ->
+                Text(
+                    text = "${i + 1}) ${comic.name}"
+                )
+            }
         }
     }
 }

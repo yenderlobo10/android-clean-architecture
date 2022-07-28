@@ -1,6 +1,7 @@
 package co.mergedev.marvelcharacters
 
 import android.app.Application
+import co.mergedev.marvelcharacters.common.resources.TimberReleaseTree
 import timber.log.Timber
 
 class App : Application() {
@@ -14,6 +15,9 @@ class App : Application() {
 
     private fun setupTimber() {
 
-        Timber.plant(Timber.DebugTree())
+        Timber.plant(
+            if (BuildConfig.DEBUG) Timber.DebugTree()
+            else TimberReleaseTree()
+        )
     }
 }
