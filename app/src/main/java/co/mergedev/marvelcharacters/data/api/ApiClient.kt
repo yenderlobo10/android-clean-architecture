@@ -9,8 +9,7 @@ import retrofit2.Retrofit
 abstract class ApiClient {
 
     abstract val baseUrl: String
-
-    abstract fun createConverterFactory(): Converter.Factory
+    abstract val converterFactory: Converter.Factory
 
 
     /**
@@ -19,6 +18,6 @@ abstract class ApiClient {
     fun createRetrofitBuilder() = Retrofit.Builder().apply {
 
         baseUrl(baseUrl)
-        addConverterFactory(createConverterFactory())
+        addConverterFactory(converterFactory)
     }
 }

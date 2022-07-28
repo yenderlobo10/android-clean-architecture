@@ -7,13 +7,13 @@ import androidx.compose.ui.graphics.Color
  */
 object AppBrandColor {
 
-    val PrimaryColor = Color(0xFF151515)
-    val PrimaryLightColor = Color(0xFF3b3b3b)
-    val PrimaryDarkColor = Color(0xFF000000)
+    val PrimaryColor = Color(0xFFE62429)
+    val PrimaryLightColor = Color(0xFFFF6153)
+    val PrimaryDarkColor = Color(0xFFAB0000)
 
-    val SecondaryColor = Color(0xFFE62429)
-    val SecondaryLightColor = Color(0xFFFF6153)
-    val SecondaryDarkColor = Color(0xFFAB0000)
+    val SecondaryColor = Color(0xFF151515)
+    val SecondaryLightColor = Color(0xFF3b3b3b)
+    val SecondaryDarkColor = Color(0xFF000000)
 }
 
 /**

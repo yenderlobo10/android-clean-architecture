@@ -9,6 +9,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 /**
  * Enabled logger interceptor to request/response
  * on [Retrofit.Builder] api client service.
+ *
+ * @param level Optional - Any value in [HttpLoggingInterceptor.Level].
  */
 fun OkHttpClient.Builder.addLogger(
     level: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BODY

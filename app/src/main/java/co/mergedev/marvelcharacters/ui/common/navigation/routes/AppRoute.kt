@@ -1,5 +1,6 @@
 package co.mergedev.marvelcharacters.ui.common.navigation.routes
 
+import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavArgument
 
 /**
@@ -13,7 +14,7 @@ import androidx.navigation.NavArgument
  */
 sealed class AppRoute(
     open val name: String,
-    val arguments: List<NavArgument> = listOf()
+    val arguments: List<NamedNavArgument> = listOf()
 ) {
 
     /**
@@ -29,5 +30,5 @@ sealed class AppRoute(
     /**
      * Detail character screen route.
      */
-    object CharacterDetail : CharacterDetailRoute(name = "character-detail")
+    object CharacterDetail : CharacterDetailRoute()
 }

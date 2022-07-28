@@ -6,6 +6,7 @@ import androidx.navigation.compose.navigation
 import co.mergedev.marvelcharacters.ui.character.view.CharacterDetailScreen
 import co.mergedev.marvelcharacters.ui.character.view.CharacterListScreen
 import co.mergedev.marvelcharacters.ui.common.navigation.routes.AppRoute
+import co.mergedev.marvelcharacters.ui.common.navigation.routes.CharacterDetailRoute
 import co.mergedev.marvelcharacters.ui.main.AppState
 
 
@@ -21,16 +22,28 @@ fun NavGraphBuilder.characterNavigation(
         route = AppRoute.CharacterList.name
     ) {
 
+        // List
         composable(
             route = "/"
         ) {
-            CharacterListScreen()
+            CharacterListScreen(
+                appState = appState
+            )
         }
 
-        composable(
-            route = AppRoute.CharacterDetail.name
-        ) {
-            CharacterDetailScreen()
+        // Detail
+        with(AppRoute.CharacterDetail) {
+            composable(
+                route = name,
+                arguments = arguments
+            ) {
+                CharacterDetailScreen(
+                    appState = appState,
+                    characterId = it.arguments?.getLong(
+                        CharacterDetailRoute.Keys.argCharacterId
+                    )
+                )
+            }
         }
     }
 }

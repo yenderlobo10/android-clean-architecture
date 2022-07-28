@@ -10,11 +10,11 @@ import retrofit2.http.Path
  */
 interface MarvelApiCharactersService {
 
-    @GET
-    suspend fun characters(): Response<CharacterDataWrapper>
+    @GET("characters")
+    suspend fun charactersList(): Response<CharacterDataWrapper>
 
-    @GET("/{characterId}")
-    suspend fun character(
+    @GET("characters/{characterId}")
+    suspend fun characterDetail(
         @Path("characterId") id: Long
     ): Response<CharacterDataWrapper>
 }

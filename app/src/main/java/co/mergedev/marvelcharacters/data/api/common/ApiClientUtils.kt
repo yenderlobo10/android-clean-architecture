@@ -1,9 +1,11 @@
 package co.mergedev.marvelcharacters.data.api.common
 
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.*
 
 /**
  * Return an instance of [MoshiConverterFactory] for [moshi] instance.
@@ -25,6 +27,8 @@ fun createMoshiConverterFactoryOrDefault(
  * to create custom converter for JSON.
  */
 fun createMoshi(): Moshi.Builder = Moshi.Builder().apply {
+
+    add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
     addLast(KotlinJsonAdapterFactory())
 }
 

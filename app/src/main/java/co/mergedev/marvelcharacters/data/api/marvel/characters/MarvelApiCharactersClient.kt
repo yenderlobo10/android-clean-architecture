@@ -7,9 +7,6 @@ import co.mergedev.marvelcharacters.data.api.marvel.MarvelApiClient
  */
 class MarvelApiCharactersClient private constructor() : MarvelApiClient() {
 
-    override val baseUrl: String
-        get() = super.baseUrl.plus("characters")
-
 
     private fun createService(): MarvelApiCharactersService =
         createRetrofitBuilder()

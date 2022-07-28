@@ -1,5 +1,6 @@
 package co.mergedev.marvelcharacters.data.model
 
+import com.squareup.moshi.Json
 import java.util.*
 
 /**
@@ -30,4 +31,22 @@ data class Character(
     val stories: StoryList?,
     val events: EventList?,
     val series: SeriesList?
-)
+) {
+
+    @Json(ignore = true)
+    val alias: String
+        get() {
+            val nameAlias =
+                name.substringAfter("(").removeSuffix(")")
+
+            return if (nameAlias != name) nameAlias else ""
+        }
+
+    @Json(ignore = true)
+    val nameWithoutAlias: String
+        get() {
+
+            return name.replaceAfter("(", "")
+                .removeSuffix("(")
+        }
+}

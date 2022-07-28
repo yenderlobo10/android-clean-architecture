@@ -1,9 +1,28 @@
 package co.mergedev.marvelcharacters.ui.common.navigation.routes
 
+import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
+
 sealed class CharacterDetailRoute(
-    override val name: String
+
+    name: String = "character-detail/{${Keys.argCharacterId}}",
+    args: List<NamedNavArgument> = Keys.args
+
 ) : AppRoute(
-    name = name
+    name = name,
+    arguments = args
 ) {
-    // TODO: implement rote features
+
+    object Keys {
+
+        val argCharacterId = "characterId"
+
+        val args = listOf(
+            navArgument(argCharacterId) { type = NavType.LongType }
+        )
+    }
+
+    fun createRoutePath(characterId: Long): String =
+        name.replace("{${Keys.argCharacterId}}", "$characterId")
 }

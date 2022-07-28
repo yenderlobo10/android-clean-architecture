@@ -29,6 +29,10 @@ val DarkPaletteColors = darkColors(
     secondary = AppBrandColor.SecondaryColor,
     secondaryVariant = AppBrandColor.SecondaryDarkColor,
     background = AppSystemColor.BackgroundDarkColor,
+    surface = AppBrandColor.SecondaryDarkColor,
+    onSecondary = AppSystemColor.PrimaryTextColor,
+    onBackground = AppSystemColor.PrimaryTextColor,
+    onSurface = AppSystemColor.PrimaryTextColor,
 )
 
 val LightPaletteColors = lightColors(
@@ -37,7 +41,7 @@ val LightPaletteColors = lightColors(
     secondary = AppBrandColor.SecondaryColor,
     secondaryVariant = AppBrandColor.SecondaryDarkColor,
     background = AppSystemColor.BackgroundLightColor,
-    surface = AppBrandColor.PrimaryColor,
+    surface = AppBrandColor.SecondaryColor,
     onPrimary = AppSystemColor.PrimaryTextColor,
     onSecondary = AppSystemColor.PrimaryTextColor,
     onBackground = AppSystemColor.SecondaryTextColor,

@@ -25,15 +25,14 @@ open class MarvelApiClient : ApiClient() {
         "hash" to "$timestamp$privateKey$publicKey".toHashMD5()
     )
 
-    override val baseUrl = "https://gateway.marvel.com/v1/public/"
-
     protected val httpClient = createHttpClient()
         .addQueryParameters(defaultRequestsQueryParams)
         .addLogger()
         .build()
 
+    override val baseUrl = "https://gateway.marvel.com/v1/public/"
 
-    override fun createConverterFactory() = createMoshiConverterFactoryOrDefault()
+    override val converterFactory = createMoshiConverterFactoryOrDefault()
 
 
     companion object {

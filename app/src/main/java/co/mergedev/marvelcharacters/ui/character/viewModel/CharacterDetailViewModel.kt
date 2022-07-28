@@ -4,43 +4,38 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import co.mergedev.marvelcharacters.data.api.common.ApiResult
 import co.mergedev.marvelcharacters.data.repository.CharacterRepository
-import co.mergedev.marvelcharacters.ui.character.state.CharacterListScreenState
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import co.mergedev.marvelcharacters.ui.character.state.CharacterDetailScreenState
 import timber.log.Timber
-import kotlin.time.Duration.Companion.seconds
 
 /**
  * TODO: document
  */
-class CharacterListViewModel : ViewModel() {
+class CharacterDetailViewModel : ViewModel() {
 
     private val repository = CharacterRepository()
 
-    var screenState by mutableStateOf(CharacterListScreenState())
+    var screenState by mutableStateOf(CharacterDetailScreenState())
         private set
 
-    init {
-        // TODO
-        viewModelScope.launch {
-            loadCharacters()
-        }
-    }
 
-
-    suspend fun loadCharacters() {
+    suspend fun loadCharacterDetail(characterId: Long?) {
 
         try {
 
-            val result = repository.listCharacters()
+            characterId?.let {
+                if (characterId <= 0) throw IllegalArgumentException()
+            }
+
+            val result = repository.detailCharacter(
+                id = characterId!!
+            )
 
             screenState = when (result) {
 
                 is ApiResult.Success -> screenState.success().copy(
-                    listCharacters = result.body.data.results
+                    character = result.body.data.results.first()
                 )
 
                 else -> screenState.error()
