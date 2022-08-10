@@ -1,7 +1,7 @@
 package co.mergedev.marvelcharacters
 
 import android.app.Application
-import co.mergedev.marvelcharacters.common.resources.TimberReleaseTree
+import co.mergedev.framework.resource.TimberReleaseTree
 import timber.log.Timber
 
 class App : Application() {
