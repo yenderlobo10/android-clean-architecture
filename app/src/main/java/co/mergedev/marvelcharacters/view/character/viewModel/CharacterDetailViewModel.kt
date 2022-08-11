@@ -8,7 +8,7 @@ import co.mergedev.data.api.marvel.MarvelApiClient
 import co.mergedev.data.api.marvel.characters.MarvelCharacterService
 import co.mergedev.data.repository.CharacterRepository
 import co.mergedev.domain.common.AppResult
-import co.mergedev.domain.usecase.DetailCharacterUseCase
+import co.mergedev.domain.usecase.character.DetailCharacterUseCase
 import co.mergedev.marvelcharacters.view.character.state.CharacterDetailScreenState
 
 /**
@@ -25,10 +25,18 @@ class CharacterDetailViewModel : ViewModel() {
         private set
 
 
-    suspend fun loadCharacterDetail(characterId: Long?) {
+    suspend fun loadCharacterDetail(
+        characterId: Long?
+    ) {
 
-        detailCharacter(id = characterId!!) {
+        detailCharacter(
+            params = DetailCharacterUseCase.Params(
+                id = characterId
+            )
+        ) {
+
             screenState = when (it) {
+
                 is AppResult.Success -> screenState.success().copy(
                     character = it.value
                 )

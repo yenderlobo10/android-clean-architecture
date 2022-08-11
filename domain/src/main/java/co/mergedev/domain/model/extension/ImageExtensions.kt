@@ -6,12 +6,13 @@ import timber.log.Timber
 
 
 /**
- * TODO: document
+ * Return url to [variant] of [Image] instance.
  *
- * @param variant
+ * @param variant Aspect ratio of image.
+ * @see ImageVariant
  */
 fun Image.buildUrl(
-    variant: ImageVariant
+    variant: ImageVariant = ImageVariant.Full.Original
 ): String {
 
     return try {

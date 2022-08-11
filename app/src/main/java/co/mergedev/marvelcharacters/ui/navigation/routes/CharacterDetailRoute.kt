@@ -16,7 +16,7 @@ sealed class CharacterDetailRoute(
 
     object Keys {
 
-        val argCharacterId = "characterId"
+        const val argCharacterId = "characterId"
 
         val args = listOf(
             navArgument(argCharacterId) { type = NavType.LongType }
