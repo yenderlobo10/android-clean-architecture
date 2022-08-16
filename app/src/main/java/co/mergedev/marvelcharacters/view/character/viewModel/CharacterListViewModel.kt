@@ -5,23 +5,20 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import co.mergedev.data.api.marvel.MarvelApiClient
-import co.mergedev.data.api.marvel.characters.MarvelCharacterService
-import co.mergedev.data.repository.CharacterRepository
 import co.mergedev.domain.common.AppResult
 import co.mergedev.domain.usecase.character.ListCharactersUseCase
 import co.mergedev.marvelcharacters.view.character.state.CharacterListScreenState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * TODO: document
  */
-class CharacterListViewModel : ViewModel() {
-
-    private val marvelApi = MarvelApiClient()
-    private val charactersService = MarvelCharacterService(marvelApi)
-    private val characterRepository = CharacterRepository(charactersService)
-    private val listCharacters = ListCharactersUseCase(characterRepository)
+@HiltViewModel
+class CharacterListViewModel @Inject constructor(
+    private val listCharacters: ListCharactersUseCase
+) : ViewModel() {
 
     var screenState by mutableStateOf(CharacterListScreenState())
         private set

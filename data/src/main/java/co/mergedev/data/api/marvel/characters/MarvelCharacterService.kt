@@ -1,11 +1,12 @@
 package co.mergedev.data.api.marvel.characters
 
 import co.mergedev.data.api.marvel.MarvelApiClient
+import javax.inject.Inject
 
 /**
  * TODO: document service
  */
-class MarvelCharacterService(
+class MarvelCharacterService @Inject constructor(
     apiClient: MarvelApiClient
 ) : IMarvelCharactersService {
 

@@ -5,13 +5,14 @@ import co.mergedev.domain.common.AppResult
 import co.mergedev.domain.model.Character
 import co.mergedev.domain.repository.ICharacterRepository
 import co.mergedev.domain.usecase.UseCaseWithoutParams
+import javax.inject.Inject
 
 /**
  * Use case to get list of [Character] from repository.
  *
  * @param repository
  */
-class ListCharactersUseCase(
+class ListCharactersUseCase @Inject constructor(
     private val repository: ICharacterRepository
 ) : UseCaseWithoutParams<List<Character>>() {
 

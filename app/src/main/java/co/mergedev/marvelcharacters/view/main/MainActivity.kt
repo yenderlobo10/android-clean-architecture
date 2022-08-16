@@ -8,10 +8,12 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import co.mergedev.marvelcharacters.ui.navigation.AppNavigationHost
 import co.mergedev.marvelcharacters.ui.theme.AppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * App wrap activity.
  */
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

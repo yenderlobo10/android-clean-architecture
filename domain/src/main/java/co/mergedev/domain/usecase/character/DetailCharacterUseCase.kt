@@ -6,13 +6,14 @@ import co.mergedev.domain.model.Character
 import co.mergedev.domain.repository.ICharacterRepository
 import co.mergedev.domain.usecase.UseCaseWithParams
 import co.mergedev.domain.usecase.character.DetailCharacterUseCase.Params
+import javax.inject.Inject
 
 /**
  * Use case to get a [Character] detail from repository.
  *
  * @param repository
  */
-class DetailCharacterUseCase(
+class DetailCharacterUseCase @Inject constructor(
     private val repository: ICharacterRepository
 ) : UseCaseWithParams<Character, Params>() {
 

@@ -5,11 +5,12 @@ import co.mergedev.domain.common.AppFailure
 import co.mergedev.domain.common.AppResult
 import co.mergedev.domain.model.Character
 import co.mergedev.domain.repository.ICharacterRepository
+import javax.inject.Inject
 
 /**
  * TODO: document repository
  */
-class CharacterRepository(
+class CharacterRepository @Inject constructor(
     private val charactersService: IMarvelCharactersService
 ) : ICharacterRepository {
 

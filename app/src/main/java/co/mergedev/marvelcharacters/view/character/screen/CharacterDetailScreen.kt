@@ -23,7 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import co.mergedev.domain.model.Character
 import co.mergedev.domain.model.enums.ImageVariant
 import co.mergedev.domain.model.extension.buildUrl
@@ -41,7 +41,7 @@ import kotlin.math.min
 fun CharacterDetailScreen(
     appState: AppState,
     characterId: Long?,
-    viewModel: CharacterDetailViewModel = viewModel()
+    viewModel: CharacterDetailViewModel = hiltViewModel()
 ) {
 
     Surface(

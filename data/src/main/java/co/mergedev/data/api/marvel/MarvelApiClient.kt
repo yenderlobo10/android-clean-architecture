@@ -7,12 +7,13 @@ import co.mergedev.data.api.common.createMoshiConverterFactoryOrDefault
 import co.mergedev.data.extensions.addLogger
 import co.mergedev.data.extensions.addQueryParameters
 import co.mergedev.framework.extension.toHashMD5
+import javax.inject.Inject
 
 /**
  * TODO: document
  * @see <a href="https://developer.marvel.com/docs">developer.marvel.com</a>
  */
-open class MarvelApiClient : ApiClient() {
+open class MarvelApiClient @Inject constructor() : ApiClient() {
 
     private val publicKey = BuildConfig.MARVEL_API_PUBLIC_KEY
     private val privateKey = BuildConfig.MARVEL_API_PRIVATE_KEY

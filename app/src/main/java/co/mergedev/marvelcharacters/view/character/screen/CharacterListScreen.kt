@@ -20,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import co.mergedev.domain.model.Character
 import co.mergedev.domain.model.enums.ImageVariant
@@ -36,7 +37,7 @@ import coil.compose.AsyncImage
 @Composable
 fun CharacterListScreen(
     appState: AppState,
-    viewModel: CharacterListViewModel = viewModel()
+    viewModel: CharacterListViewModel = hiltViewModel()
 ) {
 
     Scaffold(
