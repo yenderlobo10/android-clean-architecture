@@ -1,6 +1,6 @@
 package co.mergedev.data.repository
 
-import co.mergedev.data.api.marvel.characters.IMarvelCharactersService
+import co.mergedev.data.api.marvel.characters.MarvelCharactersService
 import co.mergedev.domain.common.AppFailure
 import co.mergedev.domain.common.AppResult
 import co.mergedev.domain.model.Character
@@ -11,7 +11,7 @@ import javax.inject.Inject
  * TODO: document repository
  */
 class CharacterRepository @Inject constructor(
-    private val charactersService: IMarvelCharactersService
+    private val charactersService: MarvelCharactersService
 ) : ICharacterRepository {
 
     override suspend fun listCharacters(): AppResult<AppFailure, List<Character>> {

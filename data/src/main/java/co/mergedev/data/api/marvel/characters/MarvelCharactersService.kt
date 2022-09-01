@@ -8,7 +8,7 @@ import retrofit2.http.Path
 /**
  * Marvel api **characters** end-points contract.
  */
-interface IMarvelCharactersService {
+interface MarvelCharactersService {
 
     @GET("characters")
     suspend fun charactersList(): Response<CharacterDataWrapper>

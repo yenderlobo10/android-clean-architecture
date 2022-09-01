@@ -1,18 +1,20 @@
 package co.mergedev.data.di
 
-import co.mergedev.data.api.marvel.characters.IMarvelCharactersService
-import co.mergedev.data.api.marvel.characters.MarvelCharacterService
-import dagger.Binds
+import co.mergedev.data.api.marvel.MarvelApiClient
+import co.mergedev.data.api.marvel.characters.MarvelCharactersService
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.components.SingletonComponent
 
 @Module
-@InstallIn(ViewModelComponent::class)
-abstract class ServiceModule {
+@InstallIn(SingletonComponent::class)
+class ServiceModule {
 
-    @Binds
-    abstract fun provideMarvelCharacterService(
-        service: MarvelCharacterService
-    ): IMarvelCharactersService
+    @Provides
+    fun provideMarvelCharacterService(
+        apiClient: MarvelApiClient
+    ): MarvelCharactersService =
+        apiClient.retrofit().create(MarvelCharactersService::class.java)
+
 }
